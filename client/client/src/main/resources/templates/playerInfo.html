@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .add{
+            width: 30%;
+            margin: 0 auto;
+        }
+        .container{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container text-center">
+    <div th:insert="header :: copy"/>
+    <div>
+        <p th:text="'Id : ' + ${player.id}"></p>
+        <p th:text="'Name : ' + ${player.playerName}"></p>
+        <p th:text="'Age : ' + ${player.Age}"></p>
+        <p th:text="'Position : ' + ${player.fieldPos}"></p>
+        <p th:text="'Goals : ' + ${player.goals}"></p>
+        <p th:text="'Cards : ' + ${player.cards}"></p>
+    </div>
+    <div th:if="${isAdmin}">
+        <form method="post" th:action="@{'/players/update/' + ${player.id}}" class="add">
+            <div class="form-group">
+                <label for="playerName">Name:</label>
+                <input id="playerName" name="playerName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Age">Age</label>
+                <input name="Age" id="Age" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="filedPos">Position</label>
+                <input name="fieldPos" id="filedPos" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="goals">Goals</label>
+                <input name="goals" id="goals" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="cards">Cards</label>
+                <input name="cards" id="cards" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+    <a class = "btn btn-primary" href="/players">Back</a>
+</div>
+</body>
+</html>

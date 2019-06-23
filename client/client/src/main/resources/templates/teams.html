@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .add{
+            width: 30%;
+            margin: 0 auto;
+        }
+        .container{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class = "container text-center">
+        <div th:insert="header :: copy"/>
+        <form method="get" action="/teams">
+            <table class = "table table-hover">
+                <thead>
+                    <th scope="col">Id</th>
+                    <th scope="col">Team Name</th>
+                    <th scope="col">League</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Coach</th>
+                </thead>
+                <tr th:each="team: ${teams}">
+                    <td scope="row" th:text="${team.id}"></td>
+                    <td th:text="${team.teamName}"></td>
+                    <td th:text="${team.league}"></td>
+                    <td th:text="${team.position}"></td>
+                    <td th:text="${team.coach}"></td>
+                    <td>
+                        <a th:if="${isAdmin}" class = "btn btn-danger" th:href="@{'/teams/delete/' + ${team.id}}">DELETE</a>
+                        <a class="btn btn-info" th:href="@{'/teams/' + ${team.id}}">Info</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div th:if="${isAdmin}">
+            <form action="/teams/create/" method="post" class="add">
+                <div class="form-group">
+                    <label for="team">Name</label>
+                    <input name="teamName" id="team" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="league">League</label>
+                    <input name="league" id="league" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="coach">Coach</label>
+                    <input name="coach" id="coach" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="pos">Position</label>
+                    <input name="position" id="pos" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+            <div class="text-center">
+                <a class="btn btn-outline-primary" href="/index">To Main</a>
+                <a class="btn btn-outline-primary" href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

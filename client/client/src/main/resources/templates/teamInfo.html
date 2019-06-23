@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${team.teamName}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .add{
+            width: 30%;
+            margin: 0 auto;
+        }
+        .container{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <div th:insert="header :: copy"/>
+        <div>
+            <p th:text="'Id : ' + ${team.id}"></p>
+            <p th:text="'Name : ' + ${team.teamName}"></p>
+            <p th:text="'Coach : ' + ${team.coach}"></p>
+            <p th:text="'League : ' + ${team.league}"></p>
+            <p th:text="'Position : ' + ${team.position}"></p>
+        </div>
+        <div th:if="${isAdmin}">
+            <form method="post" th:action="@{'/teams/update/' + ${team.id}}" class="add">
+                <div class="form-group">
+                    <label for="team">Name</label>
+                    <input name="teamName" id="team" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="league">League</label>
+                    <input name="league" id="league" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="coach">Coach</label>
+                    <input name="coach" id="coach" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="pos">Position</label>
+                    <input name="position" id="pos" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+        <a class = "btn btn-primary" href="/teams">Back</a>
+    </div>
+</body>
+</html>

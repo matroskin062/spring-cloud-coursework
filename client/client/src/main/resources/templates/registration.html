@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container{
+            width: 20%;
+        }
+        .form-control{
+            margin-top: 1px;
+        }
+        .btn{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="text-center">
+<div class="container text-center">
+    <h1>Register</h1>
+    <form action="/registration" method="post">
+        <p th:text="${errorMsg}" style="font-size: 20px; color: red;"></p>
+        <label for="username">Input username:</label>
+        <input name="username"  id="username" type="text" class="form-control" placeholder="Username"
+               autofocus="true" required/>
+        <br>
+        <label for="password" >Input password:</label>
+        <input name="password" id="password" type="password" class="form-control" placeholder="Password" required/>
+        <br>
+        <div class="form-group">
+            <label for="role">Select role:</label>
+            <select name="role" class="form-control" id="role">
+                <option>Admin</option>
+                <option>User</option>
+            </select>
+        </div>
+        <br>
+        <button class="btn btn-lg btn-outline-dark btn-block" type="submit">Sign in</button>
+        <a class="btn btn-outline-primary" href="/login">Log in</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .add{
+            width: 30%;
+            margin: 0 auto;
+        }
+        .container{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class = "container text-center">
+    <div th:insert="header :: copy"/>
+    <form method="get" action="/players">
+        <table class = "table table-hover">
+            <thead>
+                <th scope="col">Id</th>
+                <th scope="col">Player Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Position</th>
+                <th scope="col">Goals</th>
+                <th scope="col">Cards</th>
+            </thead>
+            <tr th:each="player: ${players}">
+                <td scope="row" th:text="${player.id}"></td>
+                <td th:text="${player.playerName}"></td>
+                <td th:text="${player.Age}"></td>
+                <td th:text="${player.fieldPos}"></td>
+                <td th:text="${player.goals}"></td>
+                <td th:text="${player.cards}"></td>
+                <td>
+                    <a th:if="${isAdmin}" class = "btn btn-danger" th:href="@{'/players/delete/' + ${player.id}}">DELETE</a>
+                    <a class="btn btn-info" th:href="@{'/players/' + ${player.id}}">Info</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div th:if="${isAdmin}">
+        <form action="/players/create/" method="post" class="add">
+            <div class="form-group">
+                <label for="playerName">Name:</label>
+                <input id="playerName" name="playerName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Age">Age</label>
+                <input name="Age" id="Age" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="filedPos">Position</label>
+                <input name="fieldPos" id="filedPos" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="goals">Goals</label>
+                <input name="goals" id="goals" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="cards">Cards</label>
+                <input name="cards" id="cards" type="text" class="form-control">
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-outline-primary" href="/index">To Main</a>
+        <a class="btn btn-outline-primary" href="/logout">Logout</a>
+    </div>
+</div>
+</body>
+</html>
